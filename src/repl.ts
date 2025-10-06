@@ -22,7 +22,8 @@ export function startREPL(state: State) {
     }
 
     try {
-      await command.callback(state);
+      const args = words.slice(1);
+      await command.callback(state, ...args);
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error("Error executing command:", err.message);
