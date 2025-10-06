@@ -1,5 +1,6 @@
 import { createInterface } from "node:readline";
 import { stdin, stdout } from "node:process";
+import { getCommands } from "./commands/commands.js";
 
 export function startREPL() {
   const rl = createInterface({
@@ -11,14 +12,25 @@ export function startREPL() {
   rl.prompt();
 
   rl.on("line", (line) => {
-    const cleanLine = cleanInput(line);
+    const words = cleanInput(line);
+    const commands = getCommands();
     
-    if (cleanLine.length === 0) {
-      rl.prompt();
+    if (!words.length) return rl.prompt();
+    
+    const cmdName = words[0];
+    const command = commands[cmdName];
+    
+    if (!command) {
+      console.log(`Unknown command: ${cmdName}. Type "help" for a list of commands.`);
       return;
     }
     
-    console.log("Your command was:", cleanLine[0]);
+    try {
+      command.callback(commands);
+    } catch (err) {
+      console.error("Error executing command:", err);
+    }
+    
     rl.prompt();
   });
   
@@ -29,6 +41,9 @@ export function startREPL() {
 }
 
 export function cleanInput(input: string): string[] {
-  if (!input.trim()) return [];
-  return input.trim().toLowerCase().split(/\s+/);
+  return input
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word !== "");
 }
