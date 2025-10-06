@@ -4,7 +4,7 @@ export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
   private cache: Cache;
 
-  constructor(cacheInterval = 1000 * 60 * 1) { // default 1 min
+  constructor(cacheInterval: number) {
       this.cache = new Cache(cacheInterval);
     }
 
