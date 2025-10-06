@@ -4,14 +4,14 @@ import { getCommands } from "./commands/commands.js";
 import { State } from "./state.js";
 
 export function startREPL(state: State) {
-  const { rl, commands } = state;
+  const { readline, commands } = state;
 
-  rl.prompt();
+  readline.prompt();
 
-  rl.on("line", async (input) => {
+  readline.on("line", async (input) => {
     const words = cleanInput(input);
 
-    if (!words.length) return rl.prompt();
+    if (!words.length) return readline.prompt();
 
     const cmdName = words[0];
     const command = commands[cmdName];
@@ -20,7 +20,7 @@ export function startREPL(state: State) {
       console.log(
         `Unknown command: ${cmdName}. Type "help" for a list of commands.`,
       );
-      rl.prompt();
+      readline.prompt();
       return;
     }
 
@@ -34,10 +34,10 @@ export function startREPL(state: State) {
       }
     }
 
-    rl.prompt();
+    readline.prompt();
   });
 
-  rl.on("SIGINT", () => {
+  readline.on("SIGINT", () => {
     console.log("\nExiting Pokedex...");
     process.exit(0);
   });
