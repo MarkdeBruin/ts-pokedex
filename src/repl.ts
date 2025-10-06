@@ -25,7 +25,7 @@ export function startREPL(state: State) {
     }
 
     try {
-      command.callback(state);
+      await command.callback(state);
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error("Error executing command:", err.message);
