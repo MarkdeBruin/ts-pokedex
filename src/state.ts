@@ -12,8 +12,8 @@ export type State = {
   readline: Interface;
   commands: Record<string, CLICommand>;
   pokeapi: PokeAPI;
-  nextLocationsURL?: string;
-  prevLocationsURL?: string;
+  nextLocationsURL: string;
+  prevLocationsURL: string;
 }
 
 export function initState(cacheInterval: number) {
@@ -27,7 +27,7 @@ export function initState(cacheInterval: number) {
     readline: readline,
     commands: getCommands(),
     pokeapi: new PokeAPI(cacheInterval),
-    nextLocationURL: undefined,
-    prevLocationURL: undefined,
+    nextLocationsURL: "",
+    prevLocationsURL: "",
   };
 }
