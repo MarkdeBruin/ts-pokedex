@@ -1,8 +1,7 @@
 import { CLICommand } from "../state.js";
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
-import { commandMap } from "./command_map.js";
-import { commandMapBack } from "./command_map_back.js";
+import { commandMapForwards, commandMapBackwards } from "./command_map.js";
 
 export function getCommands(): Record<string, CLICommand> {
   return {
@@ -19,12 +18,12 @@ export function getCommands(): Record<string, CLICommand> {
     map: {
       name: "map",
       description: "Shows a list of 20 new locations",
-      callback: commandMap,
+      callback: commandMapForwards,
     },
     mapb: {
       name: "mapb",
       description: "Shows a list of the previous 20 locations",
-      callback: commandMapBack,
+      callback: commandMapBackwards,
     },
   };
 }
