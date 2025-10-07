@@ -8,8 +8,7 @@ export async function commandCatch(state: State, ...args: string[]) {
   }
 
   if (state.caughtPokemon[pokemonName]) {
-    console.log(`You already caught ${pokemonName}!`);
-    return;
+    throw new Error(`You already caught ${pokemonName}!`);
   }
 
   const pokemon = await state.pokeapi.fetchPokemon(pokemonName);
