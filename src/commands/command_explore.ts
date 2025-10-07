@@ -4,7 +4,7 @@ export async function commandExplore(state: State, ...args: string[]) {
   const areaName = args[0];
 
   if (!areaName) {
-    throw new Error("you must provide a location name or id");
+    throw new Error("you must provide a location name");
   }
 
   console.log(`Exploring ${areaName}...`);
