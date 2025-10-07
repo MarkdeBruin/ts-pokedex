@@ -1,10 +1,10 @@
-import { State } from "src/state";
+import { State } from "../state.js";
 
 export async function commandExplore(state: State, ...args: string[]) {
   const areaName = args[0];
 
   if (!areaName) {
-    throw new Error("you must provide a location name");
+    throw new Error("you must provide a location name or id");
   }
 
   console.log(`Exploring ${areaName}...`);
