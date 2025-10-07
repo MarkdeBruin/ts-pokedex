@@ -5,6 +5,7 @@ import { commandExplore } from "./command_explore.js";
 import { commandHelp } from "./command_help.js";
 import { commandInspect } from "./command_inspect.js";
 import { commandMapForwards, commandMapBackwards } from "./command_map.js";
+import { commandPokedex } from "./command_pokedex.js";
 
 export function getCommands(): Record<string, CLICommand> {
   return {
@@ -29,7 +30,7 @@ export function getCommands(): Record<string, CLICommand> {
       callback: commandMapBackwards,
     },
     explore: {
-      name: "explore",
+      name: "explore <location_name>",
       description: "Shows a list of Pokemons in the given location",
       callback: commandExplore,
     },
@@ -42,6 +43,11 @@ export function getCommands(): Record<string, CLICommand> {
       name: "inspect <pokemon_name>",
       description: "View details about a caught pokemon",
       callback: commandInspect,
+    },
+    pokedex: {
+      name: "pokedex",
+      description: "View a list of all caught pokemon",
+      callback: commandPokedex,
     },
   };
 }
